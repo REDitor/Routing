@@ -22,8 +22,13 @@ class PatternRouter {
         $methodName = $explodedUri[1];
 
         // dynamically call relevant controller method
-        require __DIR__ . '/controllers/' . $controllerName . '.php';
-        $controllerObj = new $controllerName;
-        $controllerObj->{$methodName}();
+        try {
+            require __DIR__ . '/controllers/' . $controllerName . '.php';
+            $controllerObj = new $controllerName;
+            $controllerObj->{$methodName}();
+        } catch (Exception $e) {
+            http_response_code(404);
+            die();
+        }
     }
 }
