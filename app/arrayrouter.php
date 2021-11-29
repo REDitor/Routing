@@ -25,7 +25,7 @@ class ArrayRouter {
 
         require __DIR__ . '/controllers/' . $controller . '.php';
         $controllerObj = new $controller;
-        $controllerObj->{$method}();
+        $controllerObj->$method();
     }
 }
 ?>

@@ -13,10 +13,10 @@ class ArticleController extends Controller {
 
     // router maps this to /article and /article/index automatically
     public function index() {
-
+      
         // retrieve data 
         $articles = $this->articleService->getAll();
-        
+    
         // show view, param = accessible as $model in the view
         // displayView maps this to /views/article/index.php automatically
         $this->displayView($articles);

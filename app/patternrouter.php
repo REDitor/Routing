@@ -8,6 +8,11 @@ class PatternRouter {
         $defaultcontroller = 'home';
         $defaultmethod = 'index';
 
+        // ignore query parameters
+        if(str_contains($uri, '?')) {
+            $uri = substr($uri, 0, strpos($uri, '?'));
+        }
+
         // read controller/method names from URL
         $explodedUri = explode('/', $uri);
 
