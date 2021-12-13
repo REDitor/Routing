@@ -1,6 +1,12 @@
-<h1>articles!</h1>
+<h1>Articles!</h1>
 
 <?php
-var_dump($model);
+foreach($model as $article) {
+    ?>
+    <h4><?= ucfirst($article->getTitle())?></h4>
+    <small>By: <?= $article->getAuthor()?> at <?=$article->getPostedAt()?></small>
+    <p><?= $article->getContent()?></p>
+    <?php
+}
 ?>
 

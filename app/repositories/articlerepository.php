@@ -11,11 +11,7 @@ class ArticleRepository extends Repository
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Article');
-            $articles = $stmt->fetchAll();// ?? false;
-
-            // if($articles == false) {
-            //     return array();
-            // }            
+            $articles = $stmt->fetchAll();
 
             return $articles;
         } catch (PDOException $e) {

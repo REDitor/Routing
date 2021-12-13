@@ -6,7 +6,7 @@ class Article {
     private string $title;
     private string $content;
     private string $author;
-    private string $datetime;
+    private string $posted_at;
     
     /**
      * Get the value of id
@@ -109,9 +109,9 @@ class Article {
      *
      * @return string
      */
-    public function getDatetime(): string
+    public function getPostedAt(): string
     {
-        return $this->datetime;
+        return $this->posted_at;
     }
 
     /**
@@ -121,9 +121,9 @@ class Article {
      *
      * @return self
      */
-    public function setDatetime(string $datetime): self
+    public function setPostedAt(string $datetime): self
     {
-        $this->datetime = $datetime;
+        $this->posted_at = $datetime;
 
         return $this;
     }
