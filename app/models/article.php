@@ -1,6 +1,6 @@
 <?php
 
-class Article {
+class Article implements \JsonSerializable {
 
     private int $id;
     private string $title;
@@ -127,6 +127,9 @@ class Article {
 
         return $this;
     }
-}
 
-?>
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+}
