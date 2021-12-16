@@ -1,16 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Articles</title>
 </head>
 <body>
+<section id="articles">
+
+</section>
 <script>
-    fetch('http://time.jsontest.com')
-        .then(res => res.json())
-        .then((out) => {
-            console.log('Output: ', out)
-        }).catch(err => console.error(err))
+    fetch('http://localhost/api/article')
+        .then(result => result.json())
+        .then(articles => {
+            articles.forEach(article => {
+                const header = document.createElement("h1");
+                header.innerHTML = article.title;
+
+                const content = document.createElement("p");
+                content.innerHTML = article.content;
+
+                document.getElementById("articles").appendChild(header);
+                document.getElementById("articles").appendChild(content);
+
+                console.log(article.title);
+            })
+            // console.log('Output: ', articles);
+        })
+        .catch(err => console.error(err))
+
 </script>
 </body>
 </html>
