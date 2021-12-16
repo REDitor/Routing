@@ -8,29 +8,58 @@
     <title>Articles</title>
 </head>
 <body>
-<section id="articles">
+<form id="myForm">
+    <label for="title">Title: </label>
+    <input name="title" type="text" id="title"><br>
+    <label for="content">Content: </label>
+    <textarea name="content" id="content"></textarea><br>
+    <button type="button" onclick="sendForm();">Send!</button>
+</form>
 
+<section id="articles">
 </section>
 <script>
-    fetch('http://localhost/api/article')
-        .then(result => result.json())
-        .then(articles => {
-            articles.forEach(article => {
-                const header = document.createElement("h1");
-                header.innerHTML = article.title;
-
-                const content = document.createElement("p");
-                content.innerHTML = article.content;
-
-                document.getElementById("articles").appendChild(header);
-                document.getElementById("articles").appendChild(content);
-
-                console.log(article.title);
-            })
-            // console.log('Output: ', articles);
+    function sendForm() {
+        const data = {
+            title: document.getElementById("title").value,
+            content: document.getElementById("content").value
+        };
+        fetch("http://localhost/api/article", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
         })
-        .catch(err => console.error(err))
+            .then(result => {
+                console.log(result)
+                loadData();
+            })
+            .catch(error => console.log(error));
+    }
 
+    function loadData() {
+        fetch('http://localhost/api/article')
+            .then(result => result.json())
+            .then(articles => {
+                document.getElementById("articles").innerHTML = "";
+                document.getElementById("title").value = "";
+                document.getElementById("content").value = "";
+                articles.forEach(article => {
+                    const header = document.createElement("h1");
+                    header.innerHTML = article.title;
+
+                    const content = document.createElement("p");
+                    content.innerHTML = article.content;
+
+                    document.getElementById("articles").appendChild(header);
+                    document.getElementById("articles").appendChild(content);
+
+                    console.log(article.title);
+                })
+                // console.log('Output: ', articles);
+            })
+            .catch(err => console.error(err))
+    }
+    loadData();
 </script>
 </body>
 </html>

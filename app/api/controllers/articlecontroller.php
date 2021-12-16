@@ -14,6 +14,20 @@ class ArticleController
 
     public function index()
     {
-         echo json_encode($this->articleService->getAll());
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $json = file_get_contents('php://input');
+            $object = json_decode($json);
+
+            $article = new Article();
+            $article->setContent($object->content);
+            $article->setTitle($object->title);
+            $article->setAuthor("Sander");
+
+            $this->articleService->insert($article);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            echo json_encode($this->articleService->getAll());
+        }
     }
 }
